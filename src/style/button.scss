@@ -1,0 +1,34 @@
+@import './variables';
+
+.button {
+    padding-top: 11px;
+    height: 38px;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+    cursor: pointer;
+
+    &_grey {
+        background: linear-gradient(135deg, transparent 8px, $grey 0) top left,
+        linear-gradient(-45deg, transparent 8px, $grey 0) bottom right;
+        background-size: 55% 100%;
+        background-repeat: no-repeat;
+    }
+
+    &_red {
+        background: linear-gradient(135deg, transparent 8px, $main-color 0) top left,
+        linear-gradient(-45deg, transparent 8px, $main-color 0) bottom right;
+        background-size: 55% 100%;
+        background-repeat: no-repeat;
+    }
+
+    &_main {
+        width: 101px;
+    }
+
+    &_long {
+        width: 170px;
+    }
+}

@@ -1,0 +1,86 @@
+@import '../../style/variables';
+
+.randomchar {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: 250px;
+    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.25);
+
+    &__block {
+        display: flex;
+        padding: 35px 35px 35px 40px;
+
+        &-info {
+            padding-left: 30px;
+        }
+
+        &-img {
+            width: 180px;
+            height: 180px;
+        }
+
+    }
+
+    &__name {
+        color: #000;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    &__descr {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: normal;
+        margin-top: 10px;
+    }
+
+    &__btns {
+        margin-top: 18px;
+        display: flex;
+        justify-content: start;
+    }
+
+    &__btn {
+        margin-right: 30px;
+    }
+
+
+
+    &__static {
+        background-color: #232222;
+        padding: 35px 0 0 40px;
+        position: relative;
+
+        &-info {
+            color: #FFF;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        &-random {
+            color: #FFF;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: normal;
+            margin-top: 33px;
+        }
+
+        .button {
+            margin-top: 18px;
+        }
+    }
+
+    &__mjolner {
+        position: absolute;
+        right: -38px;
+        bottom: 14px;
+    }
+
+    &__shield {
+        position: absolute;
+        right: 67px;
+        bottom: 14px;
+    }
+}

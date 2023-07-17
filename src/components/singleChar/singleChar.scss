@@ -1,0 +1,29 @@
+.singleChar {
+    margin-top: 50px;
+    display: flex;
+
+    &__img {
+        width: 293px;
+        height: 293px;
+    }
+
+    &__wrapper {
+        padding-left: 50px;
+        width: 550px;
+    }
+
+    &__name {
+        color: #000;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    &__descr {
+        color: #000;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: normal;
+        margin-top: 25px;
+    }
+}
