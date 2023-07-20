@@ -17,6 +17,7 @@
         &-img {
             width: 180px;
             height: 180px;
+            object-fit: cover;
         }
 
     }
@@ -33,10 +34,11 @@
         font-weight: 400;
         line-height: normal;
         margin-top: 10px;
+        height: 90px;
     }
 
     &__btns {
-        margin-top: 18px;
+        margin-top: 15px;
         display: flex;
         justify-content: start;
     }
