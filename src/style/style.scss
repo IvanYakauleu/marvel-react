@@ -7,6 +7,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    position: relative;
 }
 
 ul,
@@ -46,17 +47,15 @@ input::-webkit-inner-spin-button {
     margin: 0; 
 }
 
+#root {
+    background: url('../resurses/img/bg-vision.png') right bottom/auto no-repeat;
+}
+
 .App {
     width: 1100px;
     margin: 0 auto;
     padding: 50px 0 50px 0;
     position: relative;
-    .bg-decoration {
-        position: absolute;
-        right: -174px;
-        bottom: -70px;
-        z-index: -1;
-    }
 }
 
 main {

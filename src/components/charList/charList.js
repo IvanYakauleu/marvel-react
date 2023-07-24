@@ -1,53 +1,110 @@
 import './charList.scss'
 
-import abyss from '../../resurses/img/ABYSS.jpg'
+import { Component } from 'react';
+import ErrorMessage from '../errorMessage/errorMessage';
+import Spinner from '../spinner/spinner';
+import MarvelService from '../../services/marvelService';
 
-const CharList = () => {
-    return (
-        <div className="charlist">
-            <div className="charlist__wrapper">
-                <ul className="charlist__items">
-                    <li className="charlist__item">
-                        <img src={abyss} alt="ABYSS" className="charlist__img" />
-                        <div className="charlist__name">ABYSS</div>
-                    </li>
-                    <li className="charlist__item activ">
-                        <img src={abyss} alt="LOKI" className="charlist__img" />
-                        <div className="charlist__name">LOKI</div>
-                    </li>
-                    <li className="charlist__item">
-                        <img src={abyss} alt="Adam Warlock" className="charlist__img" />
-                        <div className="charlist__name">Adam Warlock</div>
-                    </li>
-                    <li className="charlist__item">
-                        <img src={abyss} alt="Boom Boom" className="charlist__img" />
-                        <div className="charlist__name">Boom Boom</div>
-                    </li>
-                    <li className="charlist__item">
-                        <img src={abyss} alt="Calypso" className="charlist__img" />
-                        <div className="charlist__name">Calypso</div>
-                    </li>
-                    <li className="charlist__item">
-                        <img src={abyss} alt="Colleen Wing" className="charlist__img" />
-                        <div className="charlist__name">Colleen Wing</div>
-                    </li>
-                    <li className="charlist__item">
-                        <img src={abyss} alt="Daimon Hellstrom" className="charlist__img" />
-                        <div className="charlist__name">Daimon Hellstrom</div>
-                    </li>
-                    <li className="charlist__item">
-                        <img src={abyss} alt="Damage Control" className="charlist__img" />
-                        <div className="charlist__name">Damage Control</div>
-                    </li>
-                    <li className="charlist__item">
-                        <img src={abyss} alt="HULK" className="charlist__img" />
-                        <div className="charlist__name">HULK</div>
-                    </li>
-                </ul>
-                <div className="button button_red button_long">LOAD MORE</div>
+
+class CharList extends Component {
+    state = {
+        charList: [],
+        loading: true,
+        error: false,
+        newItemLoading: false,
+        offset: 210,
+        charEnded: false
+    }
+
+    marvelService = new MarvelService();
+
+    componentDidMount() {
+        this.onRequest();
+    }
+
+    onRequest = (offset) => {
+        this.onCharListLoading();
+        this.marvelService.getAllCharacters(offset)
+            .then(this.onCharListLoaded)
+            .catch(this.onError)
+    }
+
+    onCharListLoading = () => {
+        this.setState({
+            newItemLoading: true
+        })
+    }
+
+    onCharListLoaded = (newCharList) => {
+        let ended = false;
+        if (newCharList.length < 9) {
+            ended = true;
+        }
+
+        this.setState(({offset, charList}) => ({
+            charList: [...charList, ...newCharList],
+            loading: false,
+            newItemLoading: false,
+            offset: offset + 9,
+            charEnded: ended
+        }))
+    }
+
+    onError = () => {
+        this.setState({
+            error: true,
+            loading: false
+        })
+    }
+    
+    renderItems(arr) {
+        const items = arr.map(item => {
+            let imgStyle = {objectFit: 'cover'}
+            if (item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
+                imgStyle = {objectFit: 'unset'}
+            }
+
+            return (
+                <li className="charlist__item"
+                    key={item.id}
+                    onClick={() => this.props.onSelectedChar(item.id)}>
+                    <img src={item.thumbnail} alt={item.name} className="charlist__img" style={imgStyle}/>
+                    <div className="charlist__name">{item.name}</div>
+                </li>
+            )
+        })
+
+        return (
+            <ul className="charlist__items">
+                {items}
+            </ul>
+        )
+    }
+
+    render() {
+        const {charList, loading, error, offset, charEnded} = this.state;
+
+        const errorMessage = error ? <ErrorMessage/> : null;
+        const spinner = loading ? <Spinner/> : null;
+        const content = !(loading || error) ? this.renderItems(charList) : null;
+
+        return (
+            <div className="charlist">
+                <div className="charlist__wrapper">
+                    {errorMessage}
+                    {spinner}
+                    {content}                    
+                    <div 
+                        className="button button_red button_long"
+                        style={{'display': charEnded ? 'none' : 'block'}}
+                        onClick={() => this.onRequest(offset)}>
+                            LOAD MORE
+                        </div>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
+
 };
 
 export default CharList;
