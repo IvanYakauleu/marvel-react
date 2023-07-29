@@ -1,49 +1,26 @@
-import { Component } from "react";
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 import AppHeader from "../appHeader/appHeader";
-import RandomChar from "../randomChar/randomChar";
-import CharList from "../charList/charList";
-import CharInfo from "../charInfo/charInfo";
-import ErrorBoundary from "../errorBoundary/errorBoundary";
-import AppBaner from "../appBaner/appBaner";
-import ComicsList from "../comicsList/comicsList";
-import SingleChar from "../singleChar/singleChar";
-import SingleComics from "../singleComics/singleComics";
-
-import decoration from '../../resurses/img/bg-vision.png'
+import { MainPage, ComicsPage, Page404, SingleComicsPage } from '../pages/index';
 
 
-class App extends Component {
-	state = {
-		selectedChar: null
-	}
+const App = () => {
 
-	onSelectedChar = (id) => {
-		this.setState({
-			selectedChar: id
-		})
-	}
-
-	render() {
-		return (
+	return (
+		<Router>
 			<div className="App">
 				<AppHeader/>
 				<main>
-					<ErrorBoundary>
-						<RandomChar/>
-					</ErrorBoundary>
-					<div className="char__content">
-						<ErrorBoundary>
-							<CharList onSelectedChar={this.onSelectedChar}/>
-						</ErrorBoundary>
-						<ErrorBoundary>
-							<CharInfo charId={this.state.selectedChar}/>
-						</ErrorBoundary>
-					</div>
+					<Routes>
+						<Route path="/" element={<MainPage/>}/>
+						<Route path="/comics" element={<ComicsPage/>}/>
+						<Route path="/comics/:comicId" element={<SingleComicsPage/>}/>
+						<Route path="*" element={<Page404/>}/>
+					</Routes>
 				</main>
 			</div>
-		);
-	}
+		</Router>
+	);
 }
 
 export default App;

@@ -48,7 +48,7 @@ input::-webkit-inner-spin-button {
 }
 
 #root {
-    background: url('../resurses/img/bg-vision.png') right bottom/auto no-repeat;
+    // background: url('../resurses/img/bg-vision.png') right bottom/auto no-repeat;
 }
 
 .App {
@@ -56,6 +56,12 @@ input::-webkit-inner-spin-button {
     margin: 0 auto;
     padding: 50px 0 50px 0;
     position: relative;
+    .bg-decoration {
+        position: absolute;
+        right: -174px;
+        bottom: -70px;
+        z-index: -1;
+    }
 }
 
 main {

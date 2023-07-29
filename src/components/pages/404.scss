@@ -1,0 +1,40 @@
+@import '../../style/variables.scss';
+
+.page404 {
+    display: flex;
+    justify-content: space-around;
+    background: url('../../resurses/img/iron-man-bg.gif') center center/cover no-repeat;
+
+    &__wrapper {
+        text-align: left;
+        color: #202020;
+    }
+    &__descr {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 60px;
+        margin-top: 200px;
+        margin-bottom: 20px;
+    }
+
+    &__text {
+        font-weight: 700;
+        font-size: 25px;
+    }
+    
+    &__done {
+        font-size: 15px;
+        margin-top: 20px;
+    }
+
+    &__back { 
+        font-size: 25px;
+        font-weight: 700;
+        color: $main-color;
+        margin-top: 100px;
+    }
+
+    &__img {
+        z-index: -1;
+    }
+}

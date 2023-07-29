@@ -1,19 +1,51 @@
-import xmen from '../../resurses/img/x-men.png';
+import Spinner from '../spinner/spinner'
+import {Page404} from '../pages';
+import { useState, useEffect } from 'react';
+import { useParams,Link } from 'react-router-dom';
+import useMarvelService from '../../services/marvelService';
 
 import './singleComics.scss'
 
 const SingleComics = () => {
+    const [comic, setComic] = useState({});
+
+    const { error, loading, getComic, clearError } = useMarvelService();
+
+    const {comicId} = useParams();
+
+    useEffect(() => {
+        clearError();
+        getComic(comicId)
+            .then(res => setComic(res))
+    }, [comicId])
+    
+    const errorMessage = error ? <Page404/> : null;
+    const spinner = loading ? <Spinner/> : null;
+    const content = !(loading || error || !comic) ? <View comic={comic}/> : null;
+    
     return (
-        <div className="singleComics">
-            <img src={xmen} alt="x-men" className="singleComics__img" />
+        <>
+            {errorMessage}
+            {spinner}
+            {content}            
+        </>
+    )
+}
+
+const View = (props) => {
+    const {thumbnail, name, description, page, language, price} = props.comic;
+
+    return (
+        <div className='singleComics'>
+            <img src={thumbnail} alt={name} className="singleComics__img" />
             <div className="singleComics__wrapper">
-                <div className="singleComics__name">X-Men: Days of Future Past</div>
-                <div className="singleComics__descr">Re-live the legendary first journey into the dystopian future of 2013 - where Sentinels stalk the Earth, and the X-Men are humanity's only hope...until they die! Also featuring the first appearance of Alpha Flight, the return of the Wendigo, the history of the X-Men from Cyclops himself...and a demon for Christmas!?</div>
-                <div className="singleComics__pages">144 pages</div>
-                <div className="singleComics__language">Language: en-us</div>
-                <div className="singleComics__price">9.99$</div>
+                <div className="singleComics__name">{name}</div>
+                <div className="singleComics__descr">{description ? description : 'There is no description for this comic'}</div>
+                <div className="singleComics__pages">{page === 1 ? page + ' page' : page + ' pages'}</div>
+                <div className="singleComics__language">{language ? 'Language: ' + language : 'language: information not found'}</div>
+                <div className="singleComics__price">{price ? `price: ` + price + '$' : 'not available'}</div>
             </div>
-            <a href="#" className="singleComics__back">Back to all</a>
+            <Link to={'/comics'} className="singleComics__back">Back to all</Link>
         </div>
     )
 }
