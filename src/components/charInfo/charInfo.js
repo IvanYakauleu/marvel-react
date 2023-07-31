@@ -1,6 +1,8 @@
 import './charInfo.scss'
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+
+import FormGetChar from '../form/form';
 import useMarvelService from '../../services/marvelService';
 import ErrorMessage from '../errorMessage/errorMessage';
 import Spinner from '../spinner/spinner';
@@ -44,6 +46,7 @@ const CharInfo = (props) => {
             {errorMessage}
             {spinner}
             {content}
+            <FormGetChar/>
         </div>
     )
 };
@@ -60,12 +63,12 @@ const View = ({char}) => {
                 <img src={thumbnail} alt={name} className="charinfo__img" style={imgStyle}/>
                 <div className='charinfo__btns'>
                     <div className="charinfo__name">{name}</div>
-                    <a href={homepage} className="button button_red button_main">HOMEPAGE</a>
-                    <a href={wiki} className="button button_grey button_main">WIKI</a>
+                    <a href={homepage} className="button button_red button_main button_first">HOMEPAGE</a>
+                    <a href={wiki} className="button button_grey button_main button_second">WIKI</a>
                 </div>
             </div>
 
-            <div className="charinfo__descr">{description}</div>
+            <div className="charinfo__descr">{description.slice(0, 210) + "..."}</div>
 
             <div className="charinfo__text">Comics:</div>
             <ul className="charinfo__list">

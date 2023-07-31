@@ -33,12 +33,13 @@
 
     .button {
         margin-left: 25px;
-        position: absolute;
 
-        &:nth-child(2) {
+        &_first {
+            position: absolute;
             bottom: 48px;
         }
-        &:nth-child(3) {
+        &_second {
+            position: absolute;
             bottom: 0px;
         }
     }

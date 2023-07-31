@@ -1,6 +1,7 @@
 import './charList.scss'
 
 import { useState, useEffect } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import ErrorMessage from '../errorMessage/errorMessage';
 import Spinner from '../spinner/spinner';
 import useMarvelService from '../../services/marvelService';
@@ -50,25 +51,26 @@ const CharList = (props) => {
             }
 
             return (
-                <li className={clazz}
-                    tabIndex={0}
-                    key={item.id}
-                    onClick={() => props.onSelectedChar(item.id)}
-                    onKeyDown={(e) => {
-                        if (e.key === ' ' || e.key === "Enter") {
-                            props.onSelectedChar(item.id)
-                        }
-                    }}>
-                    <img src={item.thumbnail} alt={item.name} className="charlist__img" style={imgStyle}/>
-                    <div className="charlist__name">{item.name}</div>
-                </li>
+                <CSSTransition timeout={600} key={item.id} classNames={'charlist__item'}>
+                    <li className={clazz}
+                        tabIndex={0}
+                        onClick={() => props.onSelectedChar(item.id)}
+                        onKeyDown={(e) => {
+                            if (e.key === ' ' || e.key === "Enter") {
+                                props.onSelectedChar(item.id)
+                            }
+                        }}>
+                        <img src={item.thumbnail} alt={item.name} className="charlist__img" style={imgStyle}/>
+                        <div className="charlist__name">{item.name}</div>
+                    </li>
+                </CSSTransition>
             )
         })
 
         return (
-            <ul className="charlist__items">
+            <TransitionGroup className="charlist__items">
                 {items}
-            </ul>
+            </TransitionGroup>
         )
     }
 

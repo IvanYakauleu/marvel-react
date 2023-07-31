@@ -17,9 +17,25 @@
     }
 
     &__item {
+        cursor: pointer;
         background-color: #232222;
         box-shadow: 5px 5px 20px 0px rgba(122, 25, 25, 0.25);
         transition: all 0.2s;
+        
+        &-enter {
+            opacity: 0;
+        }
+        &-enter-active {
+            opacity: 1;
+            transition: opacity 600ms ease-in;
+        }
+        &-exit {
+            opacity: 1;
+        }
+        &-exit-active {
+            opacity: 0;
+            transition: opacity 600ms ease-in;
+        }
     }
 
     &__img {
@@ -44,7 +60,7 @@
 .char__content {
     display: grid;
     grid-template-columns: 650px 425px;
-    grid-template-rows: max-content;
+    grid-template-rows: minmax(515px, auto);
     column-gap: 25px;
     z-index: 100;
 }

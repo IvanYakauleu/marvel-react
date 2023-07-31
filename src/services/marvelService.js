@@ -8,8 +8,6 @@ const useMarvelService = () => {
     const _apiKey = 'apikey=204e8daa4fa4e2b5a23c1784ae822151';
     const _baseOffset = 210;
 
-
-
     const getAllCharacters = async (offset = _baseOffset) => {
         const res = await request(`${_apiBase}characters?limit=9&offset=${offset}&${_apiKey}`);
         return res.data.results.map(_transformCharacter)
@@ -18,6 +16,11 @@ const useMarvelService = () => {
     const getCharacter = async (id) => {
        const res = await request(`${_apiBase}characters/${id}?&${_apiKey}`);
        return _transformCharacter(res.data.results[0]);
+    }
+
+    const getCharacterByName = async (name) => {
+        const res = await request(`${_apiBase}characters?name=${name}&${_apiKey}`);
+        return res.data.results.map(_transformCharacter);
     }
 
     const getComic = async (id) => {
@@ -46,7 +49,7 @@ const useMarvelService = () => {
         return {
             id: char.id,
             name: char.name,
-            description: char.description ? char.description.slice(0, 210) + "..." : "There is no description for this character",
+            description: char.description ? char.description : "There is no description for this character",
             thumbnail: char.thumbnail.path + '.' + char.thumbnail.extension,
             homepage: char.urls[0].url,
             wiki: char.urls[1].url,
@@ -54,8 +57,14 @@ const useMarvelService = () => {
         }
     }
 
-    return {loading, error, getAllCharacters, getCharacter, clearError, getAllComics, getComic}
+    return {loading, error, getAllCharacters, getCharacter, clearError, getAllComics, getComic, getCharacterByName}
 }
 
 
 export default useMarvelService;
+
+
+// fetch('https://gateway.marvel.com:443/v1/public/characters?name=HULK&apikey=204e8daa4fa4e2b5a23c1784ae822151')
+//     .then(res => res.json())
+//     .then(res => console.log(res.data.results))
+

@@ -1,0 +1,80 @@
+@import '../../style/variables.scss';
+
+
+.form {
+    width: 100%;
+    min-height: 127px;
+    background-color: #fff;
+    margin-top: 30px;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.25);
+    padding: 25px;
+    
+    .error {
+        margin-top: 25px;
+        color: $main-color;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    &__search   { 
+        &-wrapper {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .inner {
+                text-transform: uppercase;
+            }
+        }
+
+        &-success {
+            color: #03710E;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        &-error {
+            margin-top: 15px;
+            color: $main-color;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: normal;
+        }
+    }
+
+    &__wrapper {
+        display: flex;
+
+        .button {
+            margin-top: 15px;
+            border: none;
+            margin-left: 24px;
+            color: #FFF;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: normal;
+            padding-top: 0px;
+        }
+    }
+
+    &__title {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: normal;
+    }
+    
+
+    #name {
+        padding: 10px;
+        width: 250px;
+        height: 38px;
+        margin-top: 15px;
+        background: #FFF;
+        border: none;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+}

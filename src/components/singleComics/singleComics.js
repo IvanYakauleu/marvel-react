@@ -1,10 +1,11 @@
 import Spinner from '../spinner/spinner'
-import {Page404} from '../pages';
-import { useState, useEffect } from 'react';
-import { useParams,Link } from 'react-router-dom';
+import { useState, useEffect, lazy } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import useMarvelService from '../../services/marvelService';
 
 import './singleComics.scss'
+
+const Page404 = lazy(() => import('../pages/404'))
 
 const SingleComics = () => {
     const [comic, setComic] = useState({});
@@ -19,8 +20,8 @@ const SingleComics = () => {
             .then(res => setComic(res))
     }, [comicId])
     
-    const errorMessage = error ? <Page404/> : null;
-    const spinner = loading ? <Spinner/> : null;
+    const errorMessage = error ? <Page404 /> : null;
+    const spinner = loading ? <Spinner /> : null;
     const content = !(loading || error || !comic) ? <View comic={comic}/> : null;
     
     return (
@@ -32,7 +33,7 @@ const SingleComics = () => {
     )
 }
 
-const View = (props) => {
+const View = ( props ) => {
     const {thumbnail, name, description, page, language, price} = props.comic;
 
     return (

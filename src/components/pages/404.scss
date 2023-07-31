@@ -10,6 +10,7 @@
         color: #202020;
     }
     &__descr {
+        z-index: -1;
         text-transform: uppercase;
         font-weight: 700;
         font-size: 60px;
@@ -18,11 +19,13 @@
     }
 
     &__text {
+        z-index: -1;
         font-weight: 700;
         font-size: 25px;
     }
     
     &__done {
+        z-index: -1;
         font-size: 15px;
         margin-top: 20px;
     }

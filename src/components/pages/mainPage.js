@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import RandomChar from "../randomChar/randomChar";
+import FormGetChar from "../form/form";
 import CharList from "../charList/charList";
 import CharInfo from "../charInfo/charInfo";
 import ErrorBoundary from "../errorBoundary/errorBoundary";
